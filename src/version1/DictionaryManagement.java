@@ -24,16 +24,13 @@ public class DictionaryManagement {
     }
 
     void showAllWords() {
-        System.out.printf("%-8s", "No");
-        System.out.printf("%-24s", "|English");
-        System.out.printf("%-24s", "|Vietnamese");
-        System.out.println();
-
+        System.out.printf("%-8s%-24s%-24s\n", "No", "|English", "|Vietnamese");
+        String index, target, explain;
         for (int i = 0; i < dictionary.wordList.size(); i++) {
-            System.out.printf("%-8s", i + 1);
-            System.out.printf("%-24s", "|" + dictionary.wordList.get(i).getWord_target());
-            System.out.printf("%-24s", "|" + dictionary.wordList.get(i).getWord_explain());
-            System.out.println();
+            index = i + 1;
+            target = dictionary.wordList.get(i).getWord_target();
+            explain = dictionary.wordList.get(i).getWord_explain();
+            System.out.printf("%-8s%-24s%-24s\n", index, "|" + target, "|" + explain);
         }
     }
 }
