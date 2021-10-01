@@ -1,4 +1,4 @@
-package v1ngocbranch;
+package version1;
 
 import java.util.Scanner;
 
@@ -16,9 +16,6 @@ public class DictionaryManagement {
             System.out.print("Word_target: ");
             newWord.setWord_target(input.nextLine());
             System.out.print("Word_explain: ");
-            if (i == numOfWords - 1) {
-                newWord.setWord_explain(input.nextLine());
-            }
             newWord.setWord_explain(input.next());
             dictionary.wordList.add(newWord);
         }

@@ -1,4 +1,4 @@
-package v1ngocbranch;
+package version1;
 
 public class Word {
     private String word_target;
@@ -22,11 +22,7 @@ public class Word {
         return this.word_explain;
     }
 
-    public String toString() {
-        return "         |" + word_target + "         |" + word_explain;
-    }
-
-    Word(int index, String word_target, String word_explain) {
+    Word(String word_target, String word_explain) {
         this.word_target = word_target;
         this.word_explain = word_explain;
     }

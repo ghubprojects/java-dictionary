@@ -1,4 +1,4 @@
-package v1ngocbranch;
+package version1;
 
 public class DictionaryCommandLine {
     void dictionaryBasic() {
