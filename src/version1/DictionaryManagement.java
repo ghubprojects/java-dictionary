@@ -25,7 +25,8 @@ public class DictionaryManagement {
 
     void showAllWords() {
         System.out.printf("%-8s%-24s%-24s\n", "No", "|English", "|Vietnamese");
-        String index, target, explain;
+        String target, explain;
+        int index;
         for (int i = 0; i < dictionary.wordList.size(); i++) {
             index = i + 1;
             target = dictionary.wordList.get(i).getWord_target();
