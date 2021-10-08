@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.util.Scanner;
 
 public class DictionaryManagement {
     Dictionary dictionary = new Dictionary();
@@ -38,7 +38,7 @@ public class DictionaryManagement {
     }
 
     void insertFromFile() throws IOException {
-        File text = new File("C:/Users/phamb/source/repos/java_dictionary2/Dictionary ver2/dictionaries.txt");
+        File text = new File("C:/Users/phamb/source/repos/Ver2_dictionary_git/java-dictionary/dictionaries.txt");
         FileInputStream fileInputStream = new FileInputStream(text);
 
         InputStream inputStream = new FileInputStream(text);
@@ -78,7 +78,20 @@ public class DictionaryManagement {
     }
 
     void dictionaryAdd() {
-
+        System.out.println("Để thêm từ, vui lòng nhập theo cú pháp:\n<từ mới><enter><giải thích>\n");
+        Word newWord = new Word();
+        Scanner input = new Scanner(System.in);
+        newWord.setWord_target(input.nextLine());
+        newWord.setWord_explain(input.nextLine());
+        Boolean checkSameWord = false;
+        for(int i = 0; i < dictionary.wordList.size(); i++) {
+            if(newWord.getWord_target().equals(dictionary.wordList.get(i).getWord_target())) {
+                checkSameWord = true;
+            }
+        }
+        if(!checkSameWord) {
+            dictionary.wordList.add(newWord);
+        }
     }
 
     void dictionaryEdit() {

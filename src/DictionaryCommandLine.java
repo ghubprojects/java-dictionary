@@ -7,6 +7,9 @@ public class DictionaryCommandLine {
         dictManagement.insertFromFile();
 
         dictManagement.showAllWords();
+
+        dictManagement.dictionaryAdd();
+        dictManagement.showAllWords();
     }
 
     void dictionaryAdvanced() throws IOException {
@@ -23,7 +26,7 @@ public class DictionaryCommandLine {
     public static void main(String[] args) throws IOException {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
         //File text = new File("C:/Users/phamb/source/repos/java_dictionary2/Dictionary ver2/dictionaries.txt");
-        //dictionaryCommandLine.dictionaryBasic();
-        dictionaryCommandLine.dictionaryAdvanced();
+        dictionaryCommandLine.dictionaryBasic();
+        //dictionaryCommandLine.dictionaryAdvanced();
     }
 }
