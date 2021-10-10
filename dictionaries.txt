@@ -1,5 +1,5 @@
 hello	xin chào
 goodbye	tạm biệt
 happy	hạnh phúc
-cry	khóc
 english	Tiếng Anh
+black	đen
