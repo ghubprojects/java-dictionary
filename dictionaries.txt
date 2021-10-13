@@ -3,3 +3,14 @@ goodbye	tạm biệt
 happy	hạnh phúc
 english	Tiếng Anh
 black	đen
+hi	xin chào
+love	tình yêu
+pen	bút
+ruler	thước
+money	tiền
+memory	kỉ niệm
+mile	dặm
+languague	ngôn ngữ
+mark	đánh dấu
+minute	phút
+lamp	cừu

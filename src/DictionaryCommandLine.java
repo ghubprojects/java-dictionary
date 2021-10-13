@@ -7,7 +7,7 @@ public class DictionaryCommandLine {
         DictionaryManagement dictManagement = new DictionaryManagement();
         dictManagement.insertFromFile();
         dictManagement.showAllWords();
-        System.out.println("Tra cứu: \n");
+        System.out.println("Tra cứu: ");
         String wordSearching = input.nextLine();
         for (int i = 0; i < dictManagement.dictionary.wordList.size(); i++) {
             String target, explain;
@@ -48,7 +48,7 @@ public class DictionaryCommandLine {
         Boolean loop = true;
         while (loop) {
             dictionaryCommandLine.dictionarySearcher();
-            System.out.println("Do you want to continue? Press 'y' to continue or any keyword else to finish\n");
+            System.out.println("Do you want to continue? Press 'y' to continue or any keyword else to finish ");
             Scanner input = new Scanner(System.in);
             if (input.nextLine().equals("y")) {
                 loop = true;
