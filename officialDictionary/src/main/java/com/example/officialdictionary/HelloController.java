@@ -68,7 +68,6 @@ public class HelloController {
         SwitchScreen.Switch("hello-view.fxml", event);
      }
 
-
      public void TranslateOnline(ActionEvent event) throws IOException {
          SwitchScreen.Switch("TranslateOnline-view.fxml",event);
      }
@@ -94,7 +93,5 @@ public class HelloController {
         } else {
              return;
          }
-
     }
-
 }
