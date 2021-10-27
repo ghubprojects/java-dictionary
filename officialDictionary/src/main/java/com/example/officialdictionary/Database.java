@@ -3,6 +3,7 @@ package com.example.officialdictionary;
 import javafx.scene.control.Alert;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Database {
     public static PreparedStatement preparedStatement;
@@ -34,23 +35,6 @@ public class Database {
             ex.printStackTrace();
         }
     }
-
-    /*public void HashmapToDatabase() throws SQLException {
-        String SqlDetelteAll = "DELETE FROM tbl_edict";
-        preparedStatement = connection.prepareStatement(SqlDetelteAll);
-        preparedStatement.executeUpdate();
-        Set<String> keySet = listWord.keySet();
-        for (String key : keySet) {
-            String sqlAdd = "INSERT INTO tbl_edict (word, detail) VALUES (?, ?);\n";
-            preparedStatement = connection.prepareStatement(sqlAdd);
-            preparedStatement.setString(1, key);
-            preparedStatement.setString(2, listWord.get(key));
-            preparedStatement.executeUpdate();
-        }
-        System.out.println("Update successfully!");
-    }*/
-
-
     public String searchWord(String target) throws SQLException {
         if(listWord.containsKey(target) == false) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -64,6 +48,8 @@ public class Database {
         }
     }
 
+
+
     public void deleteWord(String target) throws SQLException {
         if(listWord.containsKey(target) == false) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -73,13 +59,16 @@ public class Database {
         }
         else {
             listWord.remove(target);
+            String sqlremove = "Delete from tbl_edict where word=?";
+            preparedStatement = connection.prepareStatement(sqlremove);
+            preparedStatement.setString(1, target);
+            preparedStatement.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification");
             alert.setContentText("Delete successfully!");
             alert.show();
 
         }
-
     }
 
     public void editWord(String target,String explain) throws SQLException {
@@ -91,6 +80,11 @@ public class Database {
         }
         else {
             listWord.put(target, explain);
+            String sqledit = "UPDATE tbl_edict SET detail = ? WHERE word = ?";
+            preparedStatement = connection.prepareStatement((sqledit));
+            preparedStatement.setString(1, explain);
+            preparedStatement.setString(2, target);
+            preparedStatement.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification!");
             alert.setContentText("Edit successfully!");
@@ -108,6 +102,91 @@ public class Database {
             alert.show();
         }
         else {
+            String sqlAdd = "INSERT INTO tbl_edict (word, detail) VALUES (?, ?);\n";
+            preparedStatement = connection.prepareStatement(sqlAdd);
+            preparedStatement.setString(1, target);
+            preparedStatement.setString(2, explain);
+            preparedStatement.executeUpdate();
+            listWord.put(target, explain);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification!");
+            alert.setContentText("Add successfully!");
+            alert.show();
+        }
+    }
+}
+/*
+public void HashmapToDatabase() throws SQLException {
+        String SqlDetelteAll = "DELETE FROM tbl_edict";
+        preparedStatement = connection.prepareStatement(SqlDetelteAll);
+        preparedStatement.executeUpdate();
+        Set<String> keySet = listWord.keySet();
+        for (String key : keySet) {
+            String sqlAdd = "INSERT INTO tbl_edict (word, detail) VALUES (?, ?);\n";
+            preparedStatement = connection.prepareStatement(sqlAdd);
+            preparedStatement.setString(1, key);
+            preparedStatement.setString(2, listWord.get(key));
+            preparedStatement.executeUpdate();
+        }
+        System.out.println("Update successfully!");
+    }
+    public void deleteWord(String target) throws SQLException {
+        if(listWord.containsKey(target) == false) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification!");
+            alert.setContentText("This word isn't available!");
+            alert.show();
+        }
+        else {
+            listWord.remove(target);
+            String sqlremove = "Delete from tbl_edict where word=?";
+            preparedStatement = connection.prepareStatement(sqlremove);
+            preparedStatement.setString(1, target);
+            preparedStatement.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification");
+            alert.setContentText("Delete successfully!");
+            alert.show();
+
+        }
+    }
+
+    public void editWord(String target,String explain) throws SQLException {
+        if(listWord.containsKey(target) == false) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification!");
+            alert.setContentText("This word isn't available!");
+            alert.show();
+        }
+        else {
+            listWord.put(target, explain);
+            String sqledit = "UPDATE tbl_edict SET detail = ? WHERE word = ?";
+            preparedStatement = connection.prepareStatement((sqledit));
+            preparedStatement.setString(1, explain);
+            preparedStatement.setString(2, target);
+            preparedStatement.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification!");
+            alert.setContentText("Edit successfully!");
+            alert.show();
+
+        }
+
+    }
+
+    public void addWord(String target, String explain) throws SQLException {
+        if(listWord.containsKey(target) == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification!");
+            alert.setContentText("This word is available!");
+            alert.show();
+        }
+        else {
+            String sqlAdd = "INSERT INTO tbl_edict (word, detail) VALUES (?, ?);\n";
+            preparedStatement = connection.prepareStatement(sqlAdd);
+            preparedStatement.setString(1, target);
+            preparedStatement.setString(2, explain);
+            preparedStatement.executeUpdate();
             listWord.put(target, explain);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Notification!");
@@ -115,81 +194,4 @@ public class Database {
             alert.show();
         }
 
-    }
-
-   /* public String searchWord(String target) throws SQLException {
-        String sqlsearch = "Select detail from tbl_edict where word=?";
-        preparedStatement = connection.prepareStatement(sqlsearch);
-        preparedStatement.setString(1, target);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if(!resultSet.next()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word isn't available!");
-            alert.show();
-            return null;
-        }
-        return resultSet.getString("detail");
-    }
-
-    public void deleteWord(String target) throws SQLException {
-        String sqlremove = "Delete from tbl_edict where word=?";
-        preparedStatement = connection.prepareStatement(sqlremove);
-        preparedStatement.setString(1, target);
-        int check = preparedStatement.executeUpdate();
-        if(check == 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word isn't available!");
-            alert.show();
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Delete successfully!");
-            alert.show();
-        }
-    }
-
-    public void editWord(String target,String explain) throws SQLException {
-        String sqledit = "UPDATE tbl_edict SET detail = ? WHERE word = ?";
-        preparedStatement = connection.prepareStatement((sqledit));
-        preparedStatement.setString(1, explain);
-        preparedStatement.setString(2, target);
-        int check = preparedStatement.executeUpdate();
-        if(check == 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word isn't available!");
-            alert.show();
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Edit successfully!");
-            alert.show();
-        }
-
-    }
-
-    public void addWord(String target, String explain) throws SQLException {
-        String sqlsearch = "Select detail from tbl_edict where word=?";
-        preparedStatement = connection.prepareStatement(sqlsearch);
-        preparedStatement.setString(1, target);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if(!resultSet.next()) {
-            String sqlAdd = "INSERT INTO tbl_edict (word, detail) VALUES (?, ?);\n";
-            preparedStatement = connection.prepareStatement(sqlAdd);
-            preparedStatement.setString(1, target);
-            preparedStatement.setString(2, explain);
-            int check = preparedStatement.executeUpdate();
-            if(check != 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Add successfully!");
-                alert.show();
-            }
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("This word is available!");
-            alert.show();
-        }
-
-    } */
-
-}
+ */

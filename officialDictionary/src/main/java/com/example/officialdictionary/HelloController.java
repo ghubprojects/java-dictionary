@@ -97,15 +97,4 @@ public class HelloController {
 
     }
 
-     /*public void saveData() throws SQLException {
-         database.HashmapToDatabase();
-     }*/
 }
-/*
-public void Translate() throws Exception {
-        String fromLang = "en";
-        String toLang = "vi";
-        String text = textTranslate.getText();
-        textExplain.setText(Translator.translate(fromLang, toLang, text));
-    }
- */
